@@ -1,0 +1,224 @@
+diff --git a/src/database.c b/src/database.c
+index b7c11ce..0bb952f 100644
+--- a/src/database.c
++++ b/src/database.c
+@@ -801,6 +801,10 @@ static int load_mem_device(db_data_t *db_data, const char *xml_device,
+ 	switch (db_data->prog_version) {
+ 	case MP_TL866A:
+ 	case MP_TL866CS:
++		/* The INFOIC voltages low byte is the VPP code (high nibble)
++		 * and the supply VCC code (low nibble), sent as is in byte 5
++		 * of the start-transaction message. */
++		device->flags.nibble_voltages = 1;
+ 		device->vcc_table = tl866a_vcc_voltages;
+ 		device->vpp_table = tl866a_vpp_voltages;
+ 		device->bb_vcc_table = tl866a_vcc_voltages;
+diff --git a/src/main.c b/src/main.c
+index 7fff8ea..4178200 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -180,7 +180,7 @@ const parameters_t *get_parameter_struct(device_t *device, uint8_t type)
+ 	case VPP_BB_VOLTAGE:
+ 		return device->bb_vpp_table;
+ 	case VCC_BB_VOLTAGE:
+-		return device->bb_vpp_table;
++		return device->bb_vcc_table;
+ 	case LOGIC_VOLTAGE:
+ 		return device->vcc_logic_table;
+ 	case SPI_CLOCK:
+@@ -218,6 +218,54 @@ int set_parameter(minipro_handle_t *handle, char *value, uint8_t *target,
+ 	return EXIT_FAILURE;
+ }
+ 
++/* VPP and supply VCC codes as the parameter tables list them. On the TL866A/CS
++ * both are nibbles of voltages.vpp (see flags.nibble_voltages). */
++static uint8_t vpp_code(const device_t *device)
++{
++	return device->flags.nibble_voltages ? device->voltages.vpp & 0xf0 :
++					       device->voltages.vpp;
++}
++
++/* TL866A/CS only: the supply VCC the programmer applies (low nibble of the
++ * voltages low byte). The VDD write / VCC verify codes stay in vdd/vcc. */
++static uint8_t supply_vcc_code(const device_t *device)
++{
++	return device->voltages.vpp & 0x0f;
++}
++
++/* Set VPP from a parameter name, keeping the TL866A supply VCC nibble */
++static int set_vpp(minipro_handle_t *handle, char *value, uint8_t type)
++{
++	device_t *device = handle->device;
++	uint8_t v;
++
++	if (set_parameter(handle, value, &v, type))
++		return EXIT_FAILURE;
++	if (device->flags.nibble_voltages)
++		device->voltages.vpp = (device->voltages.vpp & 0x0f) |
++				       (v & 0xf0);
++	else
++		device->voltages.vpp = v;
++	return EXIT_SUCCESS;
++}
++
++/* Set VCC from a parameter name. On the TL866A/CS the supply VCC the programmer
++ * applies is the low nibble of voltages.vpp, so it is set too (upstream #375:
++ * --vcc only changed the verify code and had no effect on the supply). */
++static int set_vcc(minipro_handle_t *handle, char *value, uint8_t type)
++{
++	device_t *device = handle->device;
++	uint8_t v;
++
++	if (set_parameter(handle, value, &v, type))
++		return EXIT_FAILURE;
++	if (device->flags.nibble_voltages && type != LOGIC_VOLTAGE)
++		device->voltages.vpp = (device->voltages.vpp & 0xf0) |
++				       (v & 0x0f);
++	device->voltages.vcc = v;
++	return EXIT_SUCCESS;
++}
++
+ /* Helper function to dump a parameter table to console */
+ void print_parameters_table(const char *msg, const parameters_t *table)
+ {
+@@ -275,7 +323,7 @@ void print_options(minipro_handle_t *handle)
+ 
+ 	/* Print VPP */
+ 	fprintf(stderr, "VPP: %s V",
+-		get_parameter(handle, device->voltages.vpp,
++		get_parameter(handle, vpp_code(device),
+ 			      bb ? VPP_BB_VOLTAGE : VPP_VOLTAGE));
+ 
+ 	/* Print VDD */
+@@ -288,6 +336,11 @@ void print_options(minipro_handle_t *handle)
+ 		fprintf(stderr, "VCC: %s V, ",
+ 			get_parameter(handle, device->voltages.vcc,
+ 				      bb ? VCC_BB_VOLTAGE : VCC_VOLTAGE));
++		if (device->flags.nibble_voltages)
++			fprintf(stderr, "VCC supply: %s V, ",
++				get_parameter(handle, supply_vcc_code(device),
++					      bb ? VCC_BB_VOLTAGE :
++						   VCC_VOLTAGE));
+ 
+ 		/* Print pulse delay */
+ 		fprintf(stderr, "Pulse: %u us\n", handle->device->pulse_delay);
+@@ -664,11 +717,17 @@ void print_device_info_and_exit(cmdopts_t *cmdopts)
+ 			/* Print VPP */
+ 			fprintf(stderr,
+ 				"Default VPP programming voltage: %s V\n",
+-				get_parameter(handle, device->voltages.vpp,
++				get_parameter(handle, vpp_code(device),
+ 					      VPP_VOLTAGE));
+ 			print_parameters_table("Available VPP voltages [V]: ",
+ 					       device->vpp_table);
+ 			fprintf(stderr, "\n");
++			if (device->flags.nibble_voltages)
++				fprintf(stderr,
++					"Default VCC supply voltage: %s V\n\n",
++					get_parameter(handle,
++						      supply_vcc_code(device),
++						      VCC_VOLTAGE));
+ 
+ 			if (device->flags.can_adjust_vcc) {
+ 				/* Print VDD */
+@@ -1113,10 +1172,8 @@ int parse_options(minipro_handle_t *handle, int argc, char **argv)
+ 				device->pulse_delay = (uint16_t)v;
+ 				break;
+ 			case 1:
+-				if (set_parameter(handle, optarg,
+-						  &device->voltages.vpp,
+-						  bb ? VPP_BB_VOLTAGE :
+-						       VPP_VOLTAGE))
++				if (set_vpp(handle, optarg,
++					    bb ? VPP_BB_VOLTAGE : VPP_VOLTAGE))
+ 					return EXIT_FAILURE;
+ 				break;
+ 			case 2:
+@@ -1127,16 +1184,12 @@ int parse_options(minipro_handle_t *handle, int argc, char **argv)
+ 					return EXIT_FAILURE;
+ 				break;
+ 			case 3:
+-				if (device->chip_type == MP_LOGIC) {
+-				    if (set_parameter(handle, optarg,
+-						    &device->voltages.vcc, LOGIC_VOLTAGE))
++				if (set_vcc(handle, optarg,
++					    device->chip_type == MP_LOGIC ?
++						    LOGIC_VOLTAGE :
++					    bb ? VCC_BB_VOLTAGE :
++						 VCC_VOLTAGE))
+ 					return EXIT_FAILURE;
+-				} else {
+-				    if (set_parameter(handle, optarg,
+-						    &device->voltages.vcc,
+-						    bb ? VCC_BB_VOLTAGE : VCC_VOLTAGE))
+-					return EXIT_FAILURE;
+-				}
+ 				break;
+ 			case 4:
+ 				handle->cmdopts->set_spi_clock = 1;
+@@ -1190,10 +1243,8 @@ int parse_options(minipro_handle_t *handle, int argc, char **argv)
+ 				device->i2c_address = (uint8_t)v;
+ 				handle->cmdopts->set_i2c_addr = 1;
+ 			} else if (!strcasecmp(option, "vpp")) {
+-				if (set_parameter(handle, value,
+-						  &device->voltages.vpp,
+-						  bb ? VPP_BB_VOLTAGE :
+-						       VPP_VOLTAGE))
++				if (set_vpp(handle, value,
++					    bb ? VPP_BB_VOLTAGE : VPP_VOLTAGE))
+ 					return EXIT_FAILURE;
+ 			} else if (!strcasecmp(option, "vdd")) {
+ 				if (set_parameter(handle, value,
+@@ -1202,16 +1253,12 @@ int parse_options(minipro_handle_t *handle, int argc, char **argv)
+ 						       VCC_VOLTAGE))
+ 					return EXIT_FAILURE;
+ 			} else if (!strcasecmp(option, "vcc")) {
+-			    if (device->chip_type == MP_LOGIC) {
+-				if (set_parameter(handle, value,
+-						&device->voltages.vcc, LOGIC_VOLTAGE))
+-				    return EXIT_FAILURE;
+-			    } else {
+-				if (set_parameter(handle, value,
+-						&device->voltages.vcc,
+-						bb ? VCC_BB_VOLTAGE : VCC_VOLTAGE))
+-				    return EXIT_FAILURE;
+-			    }
++				if (set_vcc(handle, value,
++					    device->chip_type == MP_LOGIC ?
++						    LOGIC_VOLTAGE :
++					    bb ? VCC_BB_VOLTAGE :
++						 VCC_VOLTAGE))
++					return EXIT_FAILURE;
+ 			} else if (!strcasecmp(option, "spi_clock")) {
+ 				handle->cmdopts->set_spi_clock = 1;
+ 				if (!device->flags.can_adjust_clock)
+diff --git a/src/minipro.h b/src/minipro.h
+index 247b28b..149c5db 100644
+--- a/src/minipro.h
++++ b/src/minipro.h
+@@ -190,6 +190,8 @@ typedef struct flags {
+ 	uint8_t has_power_down;
+ 	uint8_t is_powerdown_disabled;
+ 	uint8_t reversed_package;
++	uint8_t nibble_voltages; /* TL866A/CS: VPP (high nibble) and the supply
++				  * VCC (low nibble) share voltages.vpp */
+ 	uint32_t raw_flags;
+ } flags_t;
+ 
+diff --git a/src/tl866a.c b/src/tl866a.c
+index d4e8374..e095769 100644
+--- a/src/tl866a.c
++++ b/src/tl866a.c
+@@ -242,8 +242,10 @@ int tl866a_begin_transaction(minipro_handle_t *handle)
+ 		format_int(&(msg[3]), handle->device->data_memory_size, 2,
+ 			   MP_LITTLE_ENDIAN);
+ 
+-		/* 8 bit device options (VPP voltage) */
+-		msg[5] = handle->device->voltages.vpp << 4;
++		/* 8 bit device options: VPP code (high nibble) and supply VCC
++		 * code (low nibble), the INFOIC voltages low byte as is.
++		 * Shifting it sent 3.3 V parts at VCC 5 V (#387). */
++		msg[5] = (uint8_t)handle->device->voltages.vpp;
+ 
+ 		/* 16 bit various options (6+7) */
+ 		format_int(&(msg[6]), handle->device->page_size, 2,

@@ -1,0 +1,21 @@
+# The emoji the sign carries, in sheet order: one per line, or several separated by spaces. Edit freely;
+# studio/marquee_studio/native_emoji.py `update` rebuilds firmware/emoji/<size>/ from the emoji pack.
+# Faces, hearts and hands (the pack's first groups), then a few dozen common objects and symbols.
+😀 😃 😄 😁 😆 😅 🤣 😂 🙂 🙃 🫠 😉 😊 😇 🥰 😍 🤩 😘 😗 ☺
+😚 😙 🥲 😋 😛 😜 🤪 😝 🤑 🤗 🤭 🫢 🫣 🤫 🤔 🫡 🤐 🤨 😐 😑
+😶 🫥 😶‍🌫 😏 😒 🙄 😬 😮‍💨 🤥 🫨 🙂‍↔ 🙂‍↕ 😌 😔 😪 🤤 😴 🫩 😷 🤒
+🤕 🤢 🤮 🤧 🥵 🥶 🥴 😵 😵‍💫 🤯 🤠 🥳 🥸 😎 🤓 🧐 😕 🫤 😟 🙁
+☹ 😮 😯 😲 😳 🫪 🥺 🥹 😦 😧 😨 😰 😥 😢 😭 😱 😖 😣 😞 😓
+😩 😫 🥱 😤 😡 🤬 😈 👿 💀 ☠ 💩 🤡 👹 👺 👻 👽 👾 🤖 😺 😸
+😹 😻 😼 😽 🙀 😿 😾 🙈 🙉 🙊 💌 💘 💝 💖 💗 💓 💞 💕 💟 ❣
+💔 ❤‍🔥 ❤‍🩹 ❤ 🩷 🧡 💛 💚 💙 🩵 💜 🤎 🖤 🩶 🤍 💋 💯 💢 🫯 💥
+💫 💦 💨 🕳 💬 👁‍🗨 🗨 🗯 💭 💤 👋 🤚 🖐 ✋ 🖖 🫱 🫲 🫳 🫴 🫷
+🫸 👌 🤌 🤏 ✌ 🤞 🫰 🤟 🤘 🤙 👈 👉 👆 🖕 👇 ☝ 🫵 👍 👎 ✊
+👊 🤛 🤜 👏 🙌 🫶 👐 🤲 🤝 🙏 ✍ 💅 🤳 💪 🦾 🦏 🦵 🦶 👂 🦻
+👃 🧠 🫀 🫁 🦷 🦴 👀 👁 👅 👄 🫦 ✨ ⭐ 🌟 🔥 💧 ⚡ ❄️ ☀️ 🌙
+🌈 ☁️ 🎉 🎊 🎈 🎁 🎂 🍰 🍕 🍔 🍟 🌮 🍿 🍩 🍪 🍫 🍭 🍒 🍓 🍉
+🍋 🍎 🍌 🥑 🌶️ ☕ 🍵 🍺 🍻 🍷 🥂 🍸 🍹 🍾 🐶 🐱 🦄 🐝 🦋 🐢
+🐸 🐼 🐧 🦊 🐻 🌹 🌻 🌸 🍀 🌵 🌲 🎵 🎶 🎤 🎸 🎮 🏆 🥇 🏀 🚀
+🚗 ✈️ 🏠 ⏰ 📣 🔔 💡 📷 💻 📱 ✅ ❌ ❗ ❓ ⚠️ 🆒 🆕 🆓 💲 ➡️
+⬅️ ⬆️ ⬇️ 🔴 🟢 🟡 ✔️ ✖️ ➕
+🌤 ⛅ 🌫 🌦 🌧 🌨 ⛈

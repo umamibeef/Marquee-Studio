@@ -1,0 +1,5 @@
+{"title": "Text", "description": "Messages shown in turn.",
+ "settings": [
+  {"key": "messages", "type": "lines", "label": "Messages (one per line)", "default": "UMAMI MARQUEE"},
+  {"key": "every", "type": "int", "label": "Each (seconds)", "default": 10}
+ ]}

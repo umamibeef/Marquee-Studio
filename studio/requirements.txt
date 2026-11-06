@@ -1,0 +1,6 @@
+# Umami Marquee Studio backend (the Flask shell over marquee_pack). Pinned to this machine's venv.
+numpy==2.0.2
+pillow==11.3.0
+fonttools==4.60.2
+flask==3.1.3
+gunicorn==23.0.0

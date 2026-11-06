@@ -1,0 +1,1 @@
+../../../../third_party/rtems-4.6.0/c/src/lib/libbsp/powerpc/mbx8xx/irq/irq.h

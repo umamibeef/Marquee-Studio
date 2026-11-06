@@ -1,0 +1,240 @@
+2003-09-04	Joel Sherrill <joel@OARcorp.com>
+
+	* rtems/new-exceptions/cpu.h, rtems/old-exceptions/cpu.h,
+	rtems/powerpc/registers.h, rtems/score/ppc.h, rtems/score/types.h:
+	URL for license changed.
+
+2003-08-21	Till Straumann <strauman@slac.stanford.edu>
+
+	PR 457/bsps
+	* rtems/powerpc/registers.h: Add a few definitions for the PowerPC
+	thermal assistance unit.
+
+2003-08-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Use rtems-bugs@rtems.com as bug report email address.
+
+2003-07-18	Till Straumann <strauman@slac.stanford.edu>
+
+	PR 288/rtems
+	* rtems/new-exceptions/cpu.h: _ISR_Nest_level is now properly
+	maintained and does not reside in SPRG0.
+
+2003-03-06	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Remove AC_CONFIG_AUX_DIR.
+
+2003-02-20	Till Straumann <strauman@slac.stanford.edu>
+
+	PR 349/bsps
+	* rtems/powerpc/registers.h: Add definitions for HID1 and DABR SPRs.
+
+2002-12-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Require autoconf-2.57 + automake-1.7.2.
+	* Makefile.am: Eliminate C_O_FILES, S_O_FILES, libscorecpu_a_OBJECTS.
+
+2002-11-19	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Fix package name.
+
+2002-11-06	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* rtems/new-exceptions/cpu.h: Remove sections on 
+	CPU_INLINE_ENABLE_DISPATCH and CPU_UNROLL_ENQUEUE_PRIORITY.
+	* rtems/old-exceptions/cpu.h: Remove sections on 
+	CPU_INLINE_ENABLE_DISPATCH and CPU_UNROLL_ENQUEUE_PRIORITY.
+	* rtems/score/cpu.h: Insert sections on
+	CPU_INLINE_ENABLE_DISPATCH and CPU_UNROLL_ENQUEUE_PRIORITY.
+
+2002-10-31	Joel Sherrill <joel@OARcorp.com>
+
+	* rtems/new-exceptions/cpu.h: Removed warnings.
+
+
+2002-10-31	Joel Sherrill <joel@OARcorp.com>
+
+	* rtems/new-exceptions/cpu.h: Removed warnings.
+
+2002-10-25	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Add nostdinc to AM_INIT_AUTOMAKE.
+
+2002-10-21	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* .cvsignore: Reformat.
+	Add autom4te*cache.
+	Remove autom4te.cache.
+
+2002-07-26	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Build libscorecpu.a instead of rtems-cpu.rel.
+
+2002-07-22	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Use .$(OBJEXT) instead of .o.
+
+2002-07-05	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: RTEMS_TOP(../../../..).
+
+2002-07-01	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Remove RTEMS_PROJECT_ROOT.
+
+2002-06-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Add RTEMS_PROG_CCAS
+
+2002-06-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Use AC_CONFIG_AUX_DIR(../../../..).
+	Add AC_PROG_RANLIB.
+
+2002-06-17	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Include $(top_srcdir)/../../../automake/*.am.
+	Use ../../../aclocal.
+
+2002-05-01	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* rtems/score/ppc.h: Remove PPC_DEBUG_MODEL.
+
+2001-05-14	Till Straumann <strauman@slac.stanford.edu>
+
+	* rtems/powerpc/registers.h, rtems/score/ppc.h: Per PR213, add 
+	support for the MPC74000 (AKA G4); there is no AltiVec support yet,
+	however.
+2002-04-30	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* rtems/score/ppc.h: Remove rtems_multilib.
+	Add mpc555 (Based on comments from Sergei Organov <osv@javad.ru>).
+	* rtems/old-exceptions/cpu.h: Remove _CPU_Data_Cache_Block_Flush.
+	Remove _CPU_Data_Cache_Block_Invalidate.
+
+2002-04-18	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* asm.h: Include cpuopts.h instead of targopts.h.
+	* rtems/new-exceptions/cpu.h: Relocated from
+	libbsp/powerpc/support/new_exception_processing/rtems/score/cpu.h
+	* rtems/old-exceptions/cpu.h: Relocated from
+	c/src/lib/libbsp/powerpc/support/old_exception_processing/rtems/score/cpu.h
+	* rtems/powerpc/registers.h: Relocated and renamed from
+	libcpu/powerpc/shared/include/cpu.h.
+	* rtems/score/cpu.h: New.
+	* Makefile.am: Reflect changes above.
+
+2001-04-03	Joel Sherrill <joel@OARcorp.com>
+
+	* Per PR94, all rtems/score/CPUtypes.h are named rtems/score/types.h.
+	* rtems/score/ppctypes.h: Removed.
+	* rtems/score/types.h: New file via CVS magic.
+	* Makefile.am, rtems/score/cpu.h: Account for name change.
+
+2002-03-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac:
+	AC_INIT(package,_RTEMS_VERSION,_RTEMS_BUGS).
+	AM_INIT_AUTOMAKE([no-define foreign 1.6]).
+	* Makefile.am: Remove AUTOMAKE_OPTIONS.
+
+2002-01-28	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Reflect changes from 2002-01-23.
+
+2002-01-23	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* rtems/Makefile.am: Removed.
+	* rtems/score/Makefile.am: Removed.
+	* configure.ac: Reflect changes above.
+	AC_CONFIG_SRCDIR(asm.h).
+
+2002-01-21	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* rtems/Makefile.am: New.
+	* rtems/.cvsignore: New.
+	* rtems/score/Makefile.am: New.
+	* rtems/score/.cvsignore: New.
+	* rtems/score/ppc.h: Relocated from shared/.
+	* rtems/score/ppctypes.h: Relocated from shared/.
+	* asm.h: Relocated from shared/.
+	* shared/Makefile.am: Removed.
+	* shared/asm.h: Removed.
+	* shared/ppc.h: Removed.
+	* shared/ppctypes.h: Removed.
+	* shared/.cvsignore: Removed.
+	* Makefile.am: Reflect changes above.
+	* configure.ac: Reflect changes above.
+
+2001-11-28	Joel Sherrill <joel@OARcorp.com>,
+
+	This was tracked as PR91.
+	* rtems/score/cpu.h: Added CPU_PROVIDES_ISR_IS_IN_PROGRESS macro which
+	is used to specify if the port uses the standard macro for this (FALSE).
+	A TRUE setting indicates the port provides its own implementation.
+
+2001-11-14	Joel Sherrill <joel@OARcorp.com>
+
+	* shared/ppc.h: The mpc8260 uses the new exception processing model 
+	and thus does not need to define PPC_USE_SPRG.
+
+2001-11-14	Andrew Dachs <A.Dachs@SSTL.co.uk>
+
+	* shared/ppc.h: mpc8260 has double FPU not single FPU.
+
+2001-11-08	Dennis Ehlin (ECS) <Dennis.Ehlin@ecs.ericsson.se>
+
+	This modification is part of the submitted modifications necessary to
+	support the IBM PPC405 family.  This submission was reviewed by
+	Thomas Doerfler <Thomas.Doerfler@imd-systems.de> who ensured it did
+	not negatively impact the ppc403 BSPs.  The submission and tracking
+	process was captured as PR50.
+	* shared/asm.h, shared/ppc.h: Added PPC405 support.
+
+2001-10-22	Andy Dachs <a.dachs@sstl.co.uk>
+
+	* shared/ppc.h: Added mpc8260 support.
+
+2001-10-12	Joel Sherrill <joel@OARcorp.com>
+
+	* shared/ppctypes.h: Fixed typo.
+
+2001-10-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* .cvsignore: Add autom4te.cache for autoconf > 2.52.
+	* configure.in: Remove.
+	* configure.ac: New file, generated from configure.in by autoupdate.
+
+2001-09-23	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* shared/Makefile.am: Use 'PREINSTALL_FILES ='.
+
+2001-02-04	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am, rtems/score/Makefile.am: 
+	Apply include_*HEADERS instead of H_FILES.
+
+2000-11-09	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Use ... instead of RTEMS_TOPdir in ACLOCAL_AMFLAGS.
+
+2000-11-02	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Switch to ACLOCAL_AMFLAGS = -I $(RTEMS_TOPdir)/aclocal.
+
+2000-10-25	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: ACLOCAL_AMFLAGS= -I $(RTEMS_TOPdir)/macros.
+        Switch to GNU canonicalization.
+
+2000-10-20	Joel Sherrill <joel@OARcorp.com>
+
+	* shared/ppc.h: For multilibs, derive PPC_HAS_FPU from _SOFT_FLOAT.
+
+2000-09-04	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Include compile.am.
+
+2000-08-10	Joel Sherrill <joel@OARcorp.com>
+
+	* ChangeLog: New file.

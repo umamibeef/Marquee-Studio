@@ -1,0 +1,10 @@
+{"title": "Weather", "description": "The weather where you are, fetched by the Studio (Open-Meteo, no account) and sent to the sign.",
+ "feed": "weather",
+ "data": ["temp", "feels", "hi", "lo", "wind", "sky", "sky_text"],
+ "settings": [
+  {"key": "format", "type": "template", "label": "Format", "default": "{temp}° {sky}"},
+  {"key": "latitude", "type": "text", "label": "Latitude", "default": "49.28"},
+  {"key": "longitude", "type": "text", "label": "Longitude", "default": "-123.12"},
+  {"key": "units", "type": "choice", "choices": ["celsius", "fahrenheit"], "label": "Units", "default": "celsius"},
+  {"key": "max_age", "type": "int", "label": "Show -- after (seconds without new data)", "default": 3600}
+ ]}

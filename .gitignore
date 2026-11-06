@@ -1,0 +1,88 @@
+# Allow-list: only source code and documentation (text) are tracked. Everything else is ignored, including
+# every binary, firmware dump, extracted asset, capture, photo and build output.
+*
+!*/
+!.gitignore
+!.gitmodules
+!LICENSE
+!*.md
+!*.py
+!*.c
+!*.cpp
+!*.inc
+!CMakeLists.txt
+!*.h
+!*.S
+!*.ld
+!*.sh
+!*.java
+!*.tsv
+!*.html
+!*.js
+!*.css
+!Makefile
+!COPYING
+!README
+!CHANGELOG
+!FEATURES
+!UPGRADING
+!*.in
+!*.toml
+# The Studio container (Dockerfile + compose; README documents it)
+!Dockerfile
+!.dockerignore
+!compose.yaml
+!compose.prod.yaml
+!studio/requirements.txt
+# The front end (frontend/: npm workspaces, React + Vite + TypeScript, vendored shadcn/ui). Its build output and
+# node_modules are ignored below.
+!frontend/**/*.ts
+!frontend/**/*.tsx
+!frontend/**/*.mjs
+!frontend/**/*.json
+!frontend/**/*.svg
+!frontend/**/.gitignore
+# VS Code debug configurations for the simulator (docs/SIMULATOR-GUI.md)
+!.vscode/launch.json
+!.vscode/tasks.json
+# Vendored upstream source is kept whole (text only: binaries were removed, see THIRD-PARTY.md)
+!third_party/**
+!analysis/libstub/**
+
+# Never, whatever the extension: firmware, its decompile/disassembly, third-party binaries and local data
+venv/
+build/
+dumps/
+captures/
+photos/
+analysis/ghidra_proj/
+analysis/ghidra_out/
+analysis/extracted/
+analysis/libsrc/
+analysis/*.asm
+bootloader/build*/
+studio/content/
+frontend/**/node_modules/
+frontend/**/dist/
+frontend/**/test-results/
+frontend/**/playwright-report/
+studio/config.json
+docs/PRIVATE-NOTES.md
+__pycache__/
+.DS_Store
+
+# local patches to third-party tools (text diffs)
+!tools/minipro/
+!tools/minipro/*.patch
+!docs/media/
+!docs/media/*.webp
+# the native emoji set, built from the emoji pack (the pack itself stays in local/)
+!firmware/emoji/**
+
+# Bought assets that may not be redistributed (e.g. the native emoji pack): kept on this machine only
+local/
+
+# Claude Code session files (agent worktrees)
+.claude/
+# the panel FPGA's bitstream comes from the sign: tools/extract_fpga_bits.py
+firmware/app/fpga_bits.h

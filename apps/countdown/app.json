@@ -1,0 +1,6 @@
+{"title": "Countdown", "description": "Days, hours, minutes and seconds left until a date, then a message.",
+ "settings": [
+  {"key": "target", "type": "datetime", "label": "Until", "default": 0},
+  {"key": "format", "type": "text", "label": "Format ({d} {h} {m} {s})", "default": "{d}d {h}h {m}m"},
+  {"key": "done", "type": "text", "label": "Once reached", "default": ""}
+ ]}

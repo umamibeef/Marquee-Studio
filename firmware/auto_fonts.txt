@@ -1,0 +1,8 @@
+# The fonts the firmware may pick by itself, when text names no font (firmware/ext/fonts.c, fonts.auto in the image):
+# a line's font is the widest of these that fits its height, a centred segment's the largest that fits its text. One
+# name per line, as the sign names its fonts (firmware/fonts.txt, firmware/stock_fonts.txt); order does not matter.
+# The Studio's previews use the same list (studio/marquee_studio/fonts.py auto_fonts, sign-emu).
+Tamzen8x16b.mqf
+6x13.mqf
+spleen-6x12.mqf
+spleen-5x8.mqf

@@ -1,0 +1,43 @@
+# Dev: live reload. `docker compose up` -> open http://localhost:5173
+#   studio-web : vite dev server (HMR) for the SPA, proxying /api and /emoji to studio-api
+#   studio-api : the Flask API over marquee_pack, source bind-mounted, Flask reloader on
+# Edits to frontend or Python are picked up live; no rebuild, so the stale-dist problem can't happen.
+#
+# Note (macOS): the Sign-window handoff and /api/send_rs485 reach the host sign through build/sim (bind-mounted
+# below). Connecting to the host's Unix socket build/sim/sign.sock from the container may not cross Docker Desktop's
+# VM; design and preview work fully regardless. The native simulator + serial stay on the host.
+services:
+  studio-api:
+    build: { context: ., target: pydeps }
+    working_dir: /app
+    command: python studio/server.py
+    environment:
+      MARQUEE_STUDIO_HOST: 0.0.0.0
+      MARQUEE_STUDIO_DEBUG: "1"
+      MARQUEE_EMOJI_PACK: /app/local/emoji-pack
+      # reach the host's Sign window (umami-marquee-sim --... with UMAMI_SIGN_TCP=0.0.0.0:8781) over the Docker VM
+      SIGN_WINDOW_TCP: host.docker.internal:8781
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./:/app                       # the repo: marquee_pack, studio, third_party, build/sim, local/emoji-pack
+    ports:
+      - "8750:8750"                   # direct API access (optional)
+
+  studio-web:
+    image: node:22-slim
+    working_dir: /app/frontend
+    # install only when the volume is empty, so repeat `up`s start fast
+    command: sh -c "[ -d node_modules/vite ] || npm ci; npm run dev -w @marquee/studio -- --host 0.0.0.0"
+    environment:
+      VITE_HOST: 0.0.0.0
+      VITE_API_PROXY: http://studio-api:8750
+    volumes:
+      - ./:/app
+      - web_node_modules:/app/frontend/node_modules   # container-owned (host node_modules are macOS binaries)
+    ports:
+      - "5173:5173"
+    depends_on: [studio-api]
+
+volumes:
+  web_node_modules:

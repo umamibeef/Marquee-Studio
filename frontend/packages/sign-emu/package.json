@@ -1,0 +1,13 @@
+{
+  "name": "@marquee/sign-emu",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The sign, emulated in the browser for previews: the firmware's text line, fonts, effects and FLC animations, ported from studio/marquee_studio/sign_emu.py and checked against it frame for frame.",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts"
+  }
+}

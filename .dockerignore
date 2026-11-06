@@ -1,0 +1,14 @@
+.git
+**/node_modules
+frontend/**/dist
+venv
+build
+bootloader/build*
+analysis/build
+analysis/extracted
+analysis/ghidra_out
+dumps
+local
+simulator/build
+**/__pycache__
+*.pyc

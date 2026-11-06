@@ -1,0 +1,7 @@
+# The sign's own fonts (the stock fonteNN.png of the original content) that our image keeps: one per line. The others
+# are left out of the boot flash (bootloader/Makefile, mkimage --drop) and of the Studio's font list
+# (studio/marquee_studio/fonts.py), so both number the fonts the same way.
+fonte01.png
+fonte02.png
+fonte03.png
+fonte04.png

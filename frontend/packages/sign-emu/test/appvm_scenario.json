@@ -1,0 +1,81 @@
+{
+ "time": "2026-11-04 15:07:00",
+ "placements": [
+  {
+   "app": "clock",
+   "line": 0,
+   "settings": {
+    "format": "%a %l:%M %p",
+    "font": "spleen-8x16.mqf",
+    "colour": 32769,
+    "background": 31,
+    "outline": 2,
+    "outline_colour": 1,
+    "seconds": 15
+   }
+  },
+  {
+   "app": "text",
+   "line": 1,
+   "settings": {
+    "messages": "PIZZA 🍕 TIME ❤️  GO \u001ff7C00RED\u001ff- \u001fm2\u001ff8002STRIPES\u001fm0\u001ff- \u001fm1WAVE",
+    "mode": 1,
+    "colour": 992,
+    "outline": 3,
+    "outline_colour": 7,
+    "background_anim": "effect00.flc"
+   }
+  },
+  {
+   "app": "weather",
+   "line": 2,
+   "settings": {
+    "font": "cozette.mqf",
+    "colour": 32514,
+    "seconds": 10
+   }
+  },
+  {
+   "app": "countdown",
+   "line": 3,
+   "settings": {
+    "target": 1793840000,
+    "format": "{d}d {h}h 🎉",
+    "seconds": 10,
+    "background_anim": "effect05.flc"
+   }
+  },
+  {
+   "app": "counter",
+   "line": 4,
+   "settings": {
+    "format": "N={n}",
+    "since": 1793750000,
+    "every": 3600,
+    "seconds": 8
+   }
+  },
+  {
+   "app": "drawtest",
+   "line": 5,
+   "settings": {}
+  }
+ ],
+ "data": {
+  "2": {
+   "temp": "12",
+   "sky": "☀"
+  }
+ },
+ "custom_emoji": [
+  {
+   "name": "test block",
+   "durations": [
+    100,
+    100,
+    200,
+    100
+   ]
+  }
+ ]
+}

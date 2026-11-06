@@ -1,0 +1,13 @@
+# Prod-style: one image, built SPA served by gunicorn. `docker compose -f compose.prod.yaml up --build`
+#   -> open http://localhost:8750   (re-run with --build to pick up changes)
+services:
+  studio:
+    build: { context: ., target: prod }
+    environment:
+      MARQUEE_EMOJI_PACK: /app/local/emoji-pack
+    volumes:
+      - ./studio/content:/app/studio/content     # persist the content library + settings
+      - ./local:/app/local                       # the emoji pack (git-ignored, host only)
+      - ./build/sim:/app/build/sim               # the Sign-window handoff (see the macOS note in compose.yaml)
+    ports:
+      - "8750:8750"

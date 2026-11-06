@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "umami-marquee-studio"
+version = "0.1.0"
+description = "Content design for the ELITE_RGB LED marquee sign: firmware-exact rendering, markup, fonts, emoji, amounts"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = ["numpy", "pillow", "fonttools"]
+
+[project.optional-dependencies]
+server = ["flask"]
+test = ["unicorn"]
+
+[tool.setuptools]
+packages = ["marquee_studio"]

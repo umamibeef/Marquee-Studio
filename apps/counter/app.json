@@ -1,0 +1,8 @@
+{"title": "Counter", "description": "A number that grows (or shrinks) by a step every so many seconds.",
+ "settings": [
+  {"key": "format", "type": "text", "label": "Format ({n} is the number)", "default": "{n}"},
+  {"key": "start", "type": "int", "label": "Start", "default": 0},
+  {"key": "step", "type": "int", "label": "Step", "default": 1},
+  {"key": "every", "type": "int", "label": "Every (seconds)", "default": 60},
+  {"key": "since", "type": "since", "label": "Counting since", "default": 0}
+ ]}

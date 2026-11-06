@@ -1,0 +1,13 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@marquee/ui/*": ["../../packages/ui/src/*"],
+      "@marquee/sign-player": ["../../packages/sign-player/src/index.ts"]
+    }
+  },
+  "include": ["src", "../../packages/ui/src", "../../packages/sign-player/src"]
+}

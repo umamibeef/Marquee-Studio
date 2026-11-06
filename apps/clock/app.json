@@ -1,0 +1,4 @@
+{"title": "Clock", "description": "The time, in any strftime format.",
+ "settings": [
+  {"key": "format", "type": "strftime", "label": "Format", "default": "%H:%M"}
+ ]}

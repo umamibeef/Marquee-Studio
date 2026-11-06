@@ -1,0 +1,32 @@
+# The fonts our firmware image carries beyond the sign's own fonte01..04 (firmware/stock_fonts.txt): one per line, the font's name on the sign and
+# the vendored pixel font it is made from (third_party/fonts; licences in THIRD-PARTY.md; the rest of the line, so
+# a path may have spaces). They are in our own format
+# (.mqf, studio/marquee_studio/mqf.py), loaded by name by our firmware (firmware/ext/fonts.c) after the sign's own,
+# in name order (fonts.lst). Picked for a 16 px panel:
+# full-height fonts, and smaller ones for two lines or long text. The image build converts them
+# (studio/marquee_studio/font_import.py) and adds them, and fonts.lst, to the boot flash; `font_import.py --set` puts the same fonts in
+# the studio's content folder, so its pickers and previews show what the sign has.
+spleen-8x16.mqf spleen/spleen-8x16.bdf
+Tamzen8x16b.mqf tamzen/Tamzen8x16b.bdf
+Tamzen8x16r.mqf tamzen/Tamzen8x16r.bdf
+9x15B.mqf misc-fixed/9x15B.bdf
+7x13B.mqf misc-fixed/7x13B.bdf
+6x13.mqf misc-fixed/6x13.bdf
+cozette.mqf cozette/cozette.bdf
+spleen-6x12.mqf spleen/spleen-6x12.bdf
+spleen-5x8.mqf spleen/spleen-5x8.bdf
+Tiny5.mqf tiny5/Tiny5.bdf
+Micro5.mqf micro5/Micro5-Regular.ttf
+Kenney-Rocket.mqf kenney/Kenney Rocket.ttf
+PressStart2P.mqf pressstart2p/PressStart2P-Regular.ttf
+scientifica-italic.mqf scientifica/scientificaItalic-11.bdf
+creep2.mqf creep2/creep2-11.bdf
+Kenney-Blocks.mqf kenney/Kenney Blocks.ttf
+unscii-8-mcr.mqf unscii/unscii-8-mcr.hex
+unscii-8-fantasy.mqf unscii/unscii-8-fantasy.hex
+DepartureMono.mqf departure-mono/DepartureMono-Regular.otf
+Kenney-High.mqf kenney/Kenney High.ttf
+Jersey10.mqf jersey10/Jersey10-Regular.ttf
+unscii-16.mqf unscii/unscii-16.hex
+JacquardaBastarda9.mqf jacquardabastarda9/JacquardaBastarda9-Regular.ttf
+unscii-8-tall.mqf unscii/unscii-8-tall.hex

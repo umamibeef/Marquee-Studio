@@ -1,0 +1,5 @@
+# Functions kept as the original instructions although the recompiled C passes every simulator check: they break
+# the real sign (found by bisecting on the board, running each build from RAM through our boot loader's window).
+# Format: name TAB reason.
+scc3_isr	real board: the app hangs with it (one of these two; bisection 2026-11-02)
+digi_codec_isr	real board: the app hangs with it (one of these two; bisection 2026-11-02)

@@ -1,0 +1,107 @@
+{
+  // Debug the simulated sign (simulator/, umami-marquee-sim: the debugger window and its gdb server) with gdb.
+  // See docs/SIMULATOR-GUI.md. Needs the C/C++ extension (ms-vscode.cpptools) and gdb with PowerPC support
+  // (brew install gdb). The first three start the simulator window themselves and stop at the app entry.
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Sign sim: from-source ELITE_RGB (C source level)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/sim/ELITE_RGB-debug.elf",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/opt/homebrew/bin/gdb",
+      "miDebuggerServerAddress": "localhost:1234",
+      "debugServerPath": "${workspaceFolder}/build/simulator/umami-marquee-sim",
+      "debugServerArgs": "--app ${workspaceFolder}/analysis/build/fw/ELITE_RGB --gdb 1234",
+      "serverStarted": "gdb server on localhost",
+      "filterStdout": true,
+      "serverLaunchTimeout": 60000,
+      "stopAtConnect": true,
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "text": "set endian big"
+        },
+        {
+          "text": "set remotetimeout 60"
+        }
+      ],
+      "preLaunchTask": "sim: debug ELF"
+    },
+    {
+      "name": "Sign sim: stock dump (symbols only)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/sim/elite_rgb_syms.elf",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/opt/homebrew/bin/gdb",
+      "miDebuggerServerAddress": "localhost:1234",
+      "debugServerPath": "${workspaceFolder}/build/simulator/umami-marquee-sim",
+      "debugServerArgs": " --gdb 1234",
+      "serverStarted": "gdb server on localhost",
+      "filterStdout": true,
+      "serverLaunchTimeout": 60000,
+      "stopAtConnect": true,
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "text": "set endian big"
+        },
+        {
+          "text": "set remotetimeout 60"
+        }
+      ],
+      "preLaunchTask": "sim: symbols ELF"
+    },
+    {
+      "name": "Sign sim: built boot flash (bootflash-fw.bin)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/sim/ELITE_RGB-debug.elf",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/opt/homebrew/bin/gdb",
+      "miDebuggerServerAddress": "localhost:1234",
+      "debugServerPath": "${workspaceFolder}/build/simulator/umami-marquee-sim",
+      "debugServerArgs": "--flash ${workspaceFolder}/bootloader/build/bootflash-fw.bin --gdb 1234",
+      "serverStarted": "gdb server on localhost",
+      "filterStdout": true,
+      "serverLaunchTimeout": 60000,
+      "stopAtConnect": true,
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "text": "set endian big"
+        },
+        {
+          "text": "set remotetimeout 60"
+        }
+      ],
+      "preLaunchTask": "sim: debug ELF"
+    },
+    {
+      "name": "Sign sim: attach to a running simulator (:1234)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/sim/elite_rgb_syms.elf",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "/opt/homebrew/bin/gdb",
+      "miDebuggerServerAddress": "localhost:1234",
+      "stopAtConnect": true,
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "text": "set endian big"
+        },
+        {
+          "text": "set remotetimeout 60"
+        }
+      ],
+      "preLaunchTask": "sim: symbols ELF"
+    }
+  ]
+}

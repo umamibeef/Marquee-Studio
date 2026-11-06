@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles/globals.css",
+    "baseColor": "zinc",
+    "cssVariables": true
+  },
+  "iconLibrary": "lucide",
+  "aliases": {
+    "components": "@marquee/ui/components",
+    "utils": "@marquee/ui/lib/utils",
+    "hooks": "@marquee/ui/hooks",
+    "lib": "@marquee/ui/lib",
+    "ui": "@marquee/ui/components/ui"
+  }
+}

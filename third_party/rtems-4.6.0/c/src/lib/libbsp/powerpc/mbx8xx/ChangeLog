@@ -1,0 +1,363 @@
+2003-12-29	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* startup/Makefile.am: start.S instead of start.s.
+
+2003-12-19	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	PR 545/bsps
+	* startup/setvec.c: Removed.
+	* startup/Makefile.am: Remove setvec.c.
+
+2003-10-22	Joel Sherrill <joel@OARcorp.com>
+
+	PR 510/bsps
+	* irq/irq.h: Add extern C wrapper.
+
+2003-09-04	Joel Sherrill <joel@OARcorp.com>
+
+	* clock/p_clock.c, ide/pcmcia_ide.c, include/bsp.h, include/coverhd.h,
+	irq/irq.c, irq/irq.h, irq/irq_asm.S, irq/irq_init.c,
+	startup/bspstart.c, startup/bspstart.c.nocache, startup/imbx8xx.c,
+	startup/mmutlbtab.c, startup/setvec.c, startup/start.S,
+	vectors/vectors.h, vectors/vectors_init.c: URL for license changed.
+
+2003-08-22	Joel Sherrill <joel@OARcorp.com>
+
+	PR 445/bsps
+	* bsp_specs: Hand edited to duplicate change Ralf applied to the CVS
+	trunk.
+
+2003-08-21      Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* ide/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+
+2003-08-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Use rtems-bugs@rtems.com as bug report email address.
+
+2003-07-18	Till Straumann <strauman@slac.stanford.edu>
+
+	PR 288/rtems
+	* irq/irq_asm.S, startup/bspstart.c: _ISR_Nest_level is now properly
+	maintained.
+
+2003-03-25	Thomas Doerfler <Thomas.Doerfler@imd-systems.de>
+
+	PR 368/filesystem
+	* ide/*: added BSP support for libchip standard ide driver
+
+2003-03-06	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Remove AC_CONFIG_AUX_DIR.
+
+2003-02-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: AM_INIT_AUTOMAKE([1.7.2]).
+
+2003-02-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: AC_PREREQ(2.57).
+
+2003-01-20	Joel Sherrill <joel@OARcorp.com>
+
+	* startup/linkcmds*: Add FreeBSD sysctl() sections.
+
+2002-12-17	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* clock/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+	* console/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+	* irq/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+	Remove SORDID_HACK. Eliminate *_O_FILES.
+	* network/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+	* startup/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+	* vectors/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+
+2002-12-10	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* wrapup/Makefile.am: Don't include @RTEMS_BSP@.cfg.
+
+2002-11-04	Joel Sherrill <joel@OARcorp.com>
+
+	* console/console.c, network/network.c: Removed warnings.
+
+2002-11-04	Joel Sherrill <joel@OARcorp.com>
+
+	* console/console.c, network/network.c: Removed warnings.
+
+2002-11-01	Joel Sherrill <joel@OARcorp.com>
+
+	* clock/p_clock.c, console/console.c, startup/bspstart.c: Removed
+	warnings.
+
+2002-10-21	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* .cvsignore: Reformat.
+	Add autom4te*cache.
+	Remove autom4te.cache.
+
+2002-08-21	Joel Sherrill <joel@OARcorp.com>
+
+	* bsp_specs: Added support for -nostdlibs.
+
+2002-08-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* clock/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* console/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* irq/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* network/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* startup/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* vectors/Makefile.am: Use .$(OBJEXT) instead of .o.
+ 	* wrapup/Makefile.am: Use .$(OBJEXT) instead of .o.
+
+2002-08-01	Joel Sherrill <joel@OARcorp.com>
+
+	* include/coverhd.h: Per PR261 removed include of
+	<rtems/score/targopts.h> because the file is no longer being 
+	generated and really wasn't being used anyway.
+
+2002-07-20	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* startup/Makefile.am: Add bsplib_DATA = linkcmds.
+
+2002-07-04	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* wrapup/Makefile.am: Eliminate TMPINSTALL_FILES.
+	Remove $(OBJS) from all-local.
+
+2002-06-29	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* wrapup/Makefile.am: Remove preinstallation of libbsp.a,
+
+2001-05-09	Joel Sherrill <joel@OARcorp.com>
+
+	* startup/linkcmds: In support of gcc 3.1, added one of more
+	of the sections .jcr, .rodata*, .data.*, .gnu.linkonce.s2.*,
+	.gnu.linkonce.sb2.*, and .gnu.linkonce.s.*.  Spacing corrections
+	and direction of segments to memory regions may also have been
+	addressed.  This was a sweep across all BSPs.
+ 
+2002-04-18	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* irq/irq.c: Reflect changes to <rtems/score/cpu.h>. 
+	Fix loopCounter.
+	* irq/irq_asm.S:  Reflect changes to <rtems/score/cpu.h>.
+	* vectors/vectors.S: Ditto.
+	* vectors/vectors_init.c: Include <rtems/bspIo.h>.
+
+2002-04-16	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* startup/bspstart.c: Include <libcpu/cpuIdent.h>, <rtems/bspIo.h>.
+
+2002-04-06	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Add BSPOPTS_*(DISPATCH_HANDLER_STAT).
+	  Remove RTEMS_ENABLE_LIBCDIR.
+
+2001-04-08	Joel Sherrill <joel@OARcorp.com>
+
+	* startup/linkcmds: Per PR170, PR171, and PR172 add .eh_frame 
+ 
+2002-03-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac:
+	AC_INIT(package,_RTEMS_VERSION,_RTEMS_BUGS).
+	AM_INIT_AUTOMAKE([no-define foreign 1.6]).
+	* clock/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* console/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* include/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* irq/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* network/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* startup/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* vectors/Makefile.am: Remove AUTOMAKE_OPTIONS.
+	* wrapup/Makefile.am: Remove AUTOMAKE_OPTIONS.
+
+2001-01-16	Eric Valette <valette@crt.canon.fr>
+
+	* vector/vector.S, irq/irq_asm.S: Make sure vectors work properly
+	in RAM and Flash based code.  The code executed for the Flash
+	version runs in both cases (code in Flash/code in RAM) but as it
+	is less efficient than the one optimized for RAM, it put it inside
+	ifdef.  A compilation error is generated if code is linked in Flash
+	with the correct ifdef set...
+
+2001-01-16	Eric Valette <valette@crt.canon.fr>
+
+	* irq/irq.c: Correct minor bug in mbx8xx interrupt handling.
+	Quoting Eric, "In theory it should be applied in each mpc8xx
+	related BSP but as I cannot test it plase maintainer/users 
+	submit patch accordingly."
+
+2002-01-03	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* console/console.c: Include rtems/bspIo.h instead of bspIo.h.
+
+2001-12-04	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Remove RTEMS_ENABLE_NETWORKING.
+
+2001-11-30	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Introduce RTEMS_BSP_CONFIGURE.
+
+2001-11-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.ac: Add RTEMS_BSPOPTS_*(DATA_CACHE_ENABLE),
+	RTEMS_BSPOPTS_*(INSTRUCTION_CACHE_ENABLE).
+
+2001-11-15	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Add @exceptions@ to SUBDIRS.
+	* configure.ac: Add RTEMS_BSPOPTS_*(), merge-in settings
+	from make/custom/mbx*.cfg, add RTEMS_PPC_EXCEPTIONS([new]).
+	* include/Makefile.am: Convert PREINSTALL_FILES to
+	TMPINSTALL_FILES, include force-preinstall.am.
+	* vectors/Makefile.am: remove bogus VPATH.
+	* wrapup/Makefile.am: Apply @exceptions@.
+
+2001-10-29	Joel Sherrill <joel@OARcorp.com>
+
+	* include/bsp.h: Modify Install_tm27_vector() so this BSP will link tm27.
+
+2001-10-12	Joel Sherrill <joel@OARcorp.com>
+
+	* clock/p_clock.c, include/bsp.h, include/coverhd.h,
+	startup/bspstart.c, startup/bspstart.c.nocache, startup/setvec.c,
+	startup/start.S: Fixed typo.
+
+2001-10-11	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* .cvsignore: Add autom4te.cache for autoconf > 2.52.
+	* configure.in: Remove.
+	* configure.ac: New file, generated from configure.in by autoupdate.
+
+2001-09-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* include/Makefile.am: Use 'PREINSTALL_FILES ='.
+	* irq/Makefile.am: Use 'PREINSTALL_FILES ='.
+	* vectors/Makefile.am: Use 'PREINSTALL_FILES ='.
+
+2001-08-31  Eric Valette <valette@crf.canon.fr>
+
+	* network/network.c: Fix to account for return value when
+	installing interrupts handler.
+
+2001-06-19	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.in: Add bspopts.h.
+	* include/.cvsignore: Add bspopts.h*, stamp-h*.
+	* include/Makefile.am: Use *_HEADERS instead of *H_FILES.
+	* include/bsp.h: Include bspopts.h.
+
+2000-06-08	Eric Valette <valette@crf.canon.fr>
+
+	* console/console.c, include/commproc.h, startup/start.S:
+	The printk/printf did not work when loaded by EPPCBUG. They did
+	work when loaded with the BDM debugger.  I suspected EPPBUG 
+	made some nasty things like patching Communication processor
+	microcode...  Anyway, the attached patch:
+          1) Enables to have printk nearly immediately after boot,
+          2) Make printf work automagically (I do not know why except I make a 
+	different initialization for printk that should be overwritten by 
+	console init later ?)
+
+	I let the default to be using EPPCBUG embedded firmware to boot and 
+	using this printk early enabler code (LOADED_BY_EPPCBUG and 
+	EARLY_CONSOLE) are on.
+
+2001-05-10	Ralf Corsepius	<corsepiu@faw.uni-ulm.de>
+
+	* configure.in: Use RTEMS_PROG_CC_FOR_TARGET([-ansi -fasm]).
+
+2001-04-20	Eric Valette <valette@crf.canon.fr>
+
+ 	* include/bsp.h: Added include of <bsp/vectors.h>
+	* vectors/vectors.h: Corrected typos.
+
+2001-04-11	Eric Valette <valette@crf.canon.fr>
+
+	* network/network.c: Fix unnecessary double assignment.
+
+2001-03-30	Eric Valette <valette@crf.canon.fr>
+
+	* clock/.cvsignore, clock/Makefile.am, clock/p_clock.c,
+	include/8xx_immap.h, include/commproc.h, include/mbx.h,
+	irq/.cvsignore, irq/Makefile.am, irq/irq.c, irq/irq.h,
+	irq/irq_asm.S, irq/irq_init.c, vectors/.cvsignore,
+	vectors/Makefile.am, vectors/vectors.S, vectors/vectors.h,
+	vectors/vectors_init.c: New files.
+	* Makefile.am, configure.in, console/console.c,
+	include/Makefile.am, network/network.c, startup/Makefile.am,
+	startup/bspstart.c, startup/imbx8xx.c, startup/linkcmds,
+	startup/mmutlbtab.c, startup/start.S, wrapup/Makefile.am:
+	The modifications to this BSP reflect the conversion of the
+	mpc8xx CPU to the "new exception processing model."
+
+2000-11-09	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Use ... instead of RTEMS_TOPdir in ACLOCAL_AMFLAGS.
+
+2000-11-02	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: Switch to ACLOCAL_AMFLAGS = -I $(RTEMS_TOPdir)/aclocal.
+
+2000-11-01	Joel Sherrill <joel@OARcorp.com>
+
+	* startup/bspstart.c, startup/bspstart.c: assoc.h, error.h, libio_.h,
+	libio.h, and libcsupport.h moved from libc to lib/include/rtems and
+	now must be referenced as <rtems/XXX.h>.   Header file order
+	was cleaned up while doing this.
+	Also removed obsolete references to STACK_CHECKER_ON.
+
+2000-10-27	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* Makefile.am: ACLOCAL_AMFLAGS= -I $(RTEMS_TOPdir)/macros.
+        Switch to GNU canonicalization.
+
+2000-10-20	Joel Sherrill <joel@OARcorp.com>
+
+	* console/console.c: Add mbx8xx_console_get_configuration() which
+	returns either nvram configuration or a static equivalent.
+
+2000-10-18	Joel Sherrill <joel@OARcorp.com>
+
+	* console/console.c: Added BSP dependent routine
+	mbx8xx_console_use_maximum_buffer_size() required by mbx8xx
+	console-generic code.  This avoids libcpu use of bsp.h.
+
+2000-09-04	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* console/Makefile.am, network/Makefile.am, startup/Makefile.am,
+	wrapup/Makefile.am: Include compile.am
+
+2000-08-30	Ralf Corsepius <corsepiu@faw.uni-ulm.de>
+
+	* configure.in: Add RTEMS_PROG_CC_FOR_TARGET, RTEMS_CANONICAL_TOOLS
+
+2000-08-11  Charles-Antoine Gauthier  <charles.gauthier@nrc.ca>
+
+	* README:
+	* console/console.c:
+	* include/bsp.h:
+	* network/network.c:
+	* startup/bspstart.c:
+	Add support for configuration parameters in NVRAM
+
+2000-08-11  Charles-Antoine Gauthier  <charles.gauthier@nrc.ca>
+
+	* console/console.c: Fix polled input.
+
+2000-08-10	Charles-Antoine Gauthier  <charles.gauthier@nrc.ca>
+
+	* README: Updated.
+	* console/console.c: Addition of support for shared printk and
+	no termios.
+	* include/bsp.h: Addition of second parameter to
+	rtems_enet_driver_attach. Removed prototypes for printk and
+	BSP_output_string.
+	* network/network.c(rtems_enet_driver_attach): Addition of second
+	parameter to function.
+
+2000-08-10	Joel Sherrill <joel@OARcorp.com>
+
+	* ChangeLog: New file.

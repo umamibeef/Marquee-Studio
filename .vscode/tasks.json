@@ -1,0 +1,80 @@
+{
+  // Simulator tasks (docs/SIMULATOR-GUI.md). Builds go to build/simulator/, the ELFs to build/sim/ (git-ignored).
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "sim: build",
+      "type": "shell",
+      "command": "cmake -S simulator -B build/simulator -DCMAKE_BUILD_TYPE=Release && cmake --build build/simulator -j 8",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "sim: symbols ELF",
+      "type": "process",
+      "command": "${workspaceFolder}/build/simulator/umami-marquee-sim-elf",
+      "dependsOn": "sim: build",
+      "problemMatcher": []
+    },
+    {
+      "label": "sim: debug ELF",
+      "type": "process",
+      "command": "${workspaceFolder}/venv/bin/python",
+      "args": [
+        "${workspaceFolder}/analysis/tools/debug_elf.py"
+      ],
+      "dependsOn": "sim: build",
+      "problemMatcher": []
+    },
+    {
+      "label": "sim: simulator (stock dump)",
+      "type": "process",
+      "command": "${workspaceFolder}/build/simulator/umami-marquee-sim",
+      "args": [
+        "--gdb",
+        "1234"
+      ],
+      "dependsOn": "sim: build",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "sim",
+        "pattern": {
+          "regexp": "^__never__$"
+        },
+        "background": {
+          "activatesOnStart": true,
+          "beginsPattern": "^simulating",
+          "endsPattern": "^gdb server on"
+        }
+      }
+    },
+    {
+      "label": "sim: simulator (built boot flash)",
+      "type": "process",
+      "command": "${workspaceFolder}/build/simulator/umami-marquee-sim",
+      "args": [
+        "--flash",
+        "${workspaceFolder}/bootloader/build/bootflash-fw.bin",
+        "--gdb",
+        "1234"
+      ],
+      "dependsOn": "sim: build",
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "sim",
+        "pattern": {
+          "regexp": "^__never__$"
+        },
+        "background": {
+          "activatesOnStart": true,
+          "beginsPattern": "^simulating",
+          "endsPattern": "^gdb server on"
+        }
+      }
+    }
+  ]
+}
